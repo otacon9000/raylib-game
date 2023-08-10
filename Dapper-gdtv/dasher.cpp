@@ -11,15 +11,22 @@ int main()
     // acceleration due to gravity (pixels/frame)/frame
     const int gravity{1};
 
-    // rectangle dimensions
-    const int width{50};
-    const int height{80};
+    //Player
+    Texture2D scarfy = LoadTexture("textures/scarfy.png");
+    Rectangle scarfyRect;
+    scarfyRect.width = scarfy.width/6;
+    scarfyRect.height = scarfy.height;
+    scarfyRect.x = 0;
+    scarfyRect.y = 0;
+    Vector2 scarfyPos;
+    scarfyPos.x = windowWidth/2 - scarfyRect.width/2;
+    scarfyPos.y = windowHeight - scarfyRect.height;
+
 
     //jump
     bool isInAir{};
     const int jumpVel{-22};
 
-    int posY{windowHeight - height};
     int velocity{0};
 
     SetTargetFPS(60);
@@ -28,7 +35,7 @@ int main()
         BeginDrawing();
         ClearBackground(WHITE);
 
-        if (posY >= windowHeight - height)
+        if (scarfyPos.y >= windowHeight - scarfyRect.height)
         {
             velocity = 0;
             isInAir = false;
@@ -44,11 +51,12 @@ int main()
             velocity += jumpVel;
         }
 
-        posY += velocity;
+        scarfyPos.y += velocity;
 
-        DrawRectangle(windowWidth/2, posY, width, height, BLUE);
+            DrawTextureRec(scarfy, scarfyRect, scarfyPos, WHITE);
 
         EndDrawing();
     }
+    UnloadTexture(scarfy);
     CloseWindow();
 }
