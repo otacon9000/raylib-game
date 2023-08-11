@@ -10,7 +10,7 @@ int main()
     const int windowHeight{384};
     InitWindow(windowWidth, windowHeight, "Andrea's Top Down");
 
-    Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png");
+   Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png");
     Vector2 mapPos{0.0, 0.0};
     const float mapScale{4.0f};
 
@@ -26,6 +26,7 @@ int main()
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png")
     };
+    goblin.setTarget(&knight);
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
